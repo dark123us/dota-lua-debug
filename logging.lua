@@ -1,14 +1,6 @@
--- local CURPATH = debug.getinfo(1,"S").source:match[[^@scripts\vscripts?(.*[\/])[^\/]-$]]
--- local logging = require(CURPATH .. "logging.logging")
-local args = {...}
-local directory = args[1]
+local directory = (...):match("(.-)[^%.]+$")
 
-print('directory is', directory)
-if directory:match('logging') then
-    directory = directory:match("(.*)logging")
-end
-
-local logging = require(directory..".lualogging.logging")
+local logging = require(directory.."lualogging.logging")
 local IsDedicatedServer = IsDedicatedServer or function() return false end
 local IsInToolsMode = IsInToolsMode or function() return false end
 local IsServer = IsServer or function() return false end
